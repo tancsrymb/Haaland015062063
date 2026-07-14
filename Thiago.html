@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>หน้าเว็บแรกของฉัน</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            color: white;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .box {
+            background: rgba(255,255,255,0.15);
+            width: 400px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #ffd700;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h1>สวัสดี 👋</h1>
+        <p>นี่คือเว็บ HTML หน้าแรกของฉัน</p>
+
+        <button onclick="showMessage()">
+            กดฉัน
+        </button>
+    </div>
+
+    <script>
+        function showMessage() {
+            alert("ยินดีต้อนรับสู่เว็บไซต์ของคุณ!");
+        }
+    </script>
+
+</body>
+</html>
