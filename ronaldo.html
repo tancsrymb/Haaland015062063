@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cristiano Ronaldo — ตำนานหมายเลข 7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pitch: #0E2818;
+    --pitch-deep: #081A10;
+    --chalk: #F2F0E8;
+    --chalk-dim: #B9C4B9;
+    --gold: #D4AF37;
+    --gold-soft: rgba(212,175,55,0.35);
+    --line: rgba(242,240,232,0.14);
+    --red: #e03131;
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--pitch);
+    color: var(--chalk);
+    font-family: 'Manrope', sans-serif;
+    overflow-x: hidden;
+  }
+  /* pitch stripe texture */
+  .stripes{
+    position: fixed; inset:0; z-index:0; pointer-events:none;
+    background: repeating-linear-gradient(
+      100deg,
+      rgba(255,255,255,0.018) 0px,
+      rgba(255,255,255,0.018) 120px,
+      transparent 120px,
+      transparent 240px
+    );
+  }
+  .wrap{ position:relative; z-index:1; max-width:1180px; margin:0 auto; padding:0 32px; }
+
+  header.hero{
+    position:relative;
+    padding-top:64px;
+    min-height: 92vh;
+    display:flex; flex-direction:column; justify-content:center;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px; letter-spacing:0.28em; text-transform:uppercase;
+    color: var(--gold); margin-bottom:22px; display:flex; align-items:center; gap:14px;
+  }
+  .eyebrow::before{ content:""; width:34px; height:1px; background:var(--gold); display:inline-block; }
+
+  .hero-title{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    line-height:0.86;
+    font-size: clamp(58px, 10.5vw, 168px);
+    letter-spacing: 0.01em;
+    margin:0;
+    text-transform:uppercase;
+  }
+  .hero-title .sub{
+    display:block;
+    font-family:'Manrope', sans-serif;
+    font-weight:800;
+    font-size: clamp(16px, 2vw, 24px);
+    letter-spacing:0.05em;
+    color: var(--chalk-dim);
+    margin-top:18px;
+    text-transform:none;
+  }
+
+  .hero-num{
+    position:absolute;
+    top:2vh; right:-2vw;
+    font-family:'Anton', sans-serif;
+    font-size: clamp(220px, 34vw, 520px);
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--gold-soft);
+    line-height:1;
+    z-index:-1;
+    user-select:none;
+    pointer-events:none;
+  }
+
+  .hero-foot{
+    margin-top:56px;
+    display:flex; gap:48px; flex-wrap:wrap;
+    font-family:'JetBrains Mono', monospace;
+  }
+  .hero-foot div{ font-size:13px; color:var(--chalk-dim); letter-spacing:0.04em; }
+  .hero-foot strong{
+    display:block; color:var(--chalk); font-size:26px; font-family:'Anton',sans-serif; letter-spacing:0.02em;
+  }
+
+  section{ padding: 100px 0; border-bottom:1px solid var(--line); position:relative; }
+  .kicker{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold);
+    margin-bottom:10px;
+  }
+  h2.section-title{
+    font-family:'Anton', sans-serif; font-weight:400; text-transform:uppercase;
+    font-size: clamp(30px, 4.6vw, 54px); margin:0 0 46px 0; letter-spacing:0.01em;
+  }
+
+  /* STATS */
+  .stat-grid{
+    display:grid; grid-template-columns: repeat(4,1fr); gap:1px;
+    background: var(--line); border:1px solid var(--line);
+  }
+  .stat{
+    background: var(--pitch); padding: 34px 26px;
+  }
+  .stat .n{
+    font-family:'Anton', sans-serif; font-size: clamp(34px,4vw,52px); color:var(--gold); line-height:1;
+  }
+  .stat .l{
+    margin-top:10px; font-size:13px; color:var(--chalk-dim); font-family:'JetBrains Mono', monospace; letter-spacing:0.03em;
+  }
+  @media (max-width: 760px){ .stat-grid{ grid-template-columns: repeat(2,1fr); } }
+
+  /* TIMELINE — touchline */
+  .timeline{ position:relative; padding-left: 4px; }
+  .touchline{
+    position:absolute; left:19px; top:6px; bottom:6px; width:2px;
+    background: linear-gradient(var(--gold), transparent 96%);
+    opacity:0.6;
+  }
+  .tl-item{
+    position:relative; padding-left:64px; padding-bottom:46px;
+  }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-dot{
+    position:absolute; left:10px; top:4px;
+    width:20px; height:20px; border-radius:50%;
+    background: var(--pitch); border:2px solid var(--gold);
+  }
+  .tl-year{
+    font-family:'JetBrains Mono', monospace; color:var(--gold); font-size:13px; letter-spacing:0.05em;
+  }
+  .tl-club{
+    font-family:'Anton', sans-serif; font-size: clamp(22px,2.6vw,32px); text-transform:uppercase; margin:6px 0 8px 0;
+  }
+  .tl-desc{ color:var(--chalk-dim); font-size:15.5px; line-height:1.65; max-width:620px; }
+
+  /* HONOURS */
+  .honours{
+    display:grid; grid-template-columns: repeat(3,1fr); gap:28px;
+  }
+  .honour-card{
+    border:1px solid var(--line); padding:28px 24px; position:relative;
+  }
+  .honour-card .tag{
+    font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--gold); letter-spacing:0.18em; text-transform:uppercase;
+  }
+  .honour-card h3{
+    font-family:'Anton', sans-serif; font-weight:400; font-size:22px; text-transform:uppercase; margin:12px 0 10px 0;
+  }
+  .honour-card p{ color:var(--chalk-dim); font-size:14.5px; line-height:1.6; margin:0; }
+  @media (max-width: 860px){ .honours{ grid-template-columns: 1fr; } }
+
+  /* SIGNATURE — celebration diagram */
+  .siuu{
+    display:flex; align-items:center; gap:60px; flex-wrap:wrap;
+  }
+  .siuu svg{ width:220px; height:auto; flex-shrink:0; }
+  .siuu-text{ max-width:520px; color:var(--chalk-dim); font-size:16px; line-height:1.75; }
+  .siuu-text b{ color:var(--chalk); }
+
+  footer{
+    padding:56px 0 70px 0;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
+  }
+  footer .mark{ font-family:'Anton', sans-serif; font-size:22px; letter-spacing:0.02em; }
+  footer .note{ color:var(--chalk-dim); font-size:13px; font-family:'JetBrains Mono', monospace; }
+
+  a{ color: var(--gold); }
+
+  @media (prefers-reduced-motion: no-preference){
+    .fade-up{
+      opacity:0; transform: translateY(18px);
+      animation: fadeUp 0.7s ease forwards;
+    }
+    @keyframes fadeUp{ to{ opacity:1; transform:none; } }
+  }
+</style>
+</head>
+<body>
+<div class="stripes"></div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-num" aria-hidden="true">7</div>
+    <div class="eyebrow">โปรตุเกส · กองหน้า · อัล นาสร์</div>
+    <h1 class="hero-title">
+      CRISTIANO<br>RONALDO
+      <span class="sub">ดอส ซานโตส อาเวย์รู — จากฟุงชาลสู่ผู้เล่นที่ทำประตูมากที่สุดในประวัติศาสตร์ฟุตบอลชาย</span>
+    </h1>
+    <div class="hero-foot">
+      <div><strong>41</strong>อายุ (เกิด 5 ก.พ. 1985)</div>
+      <div><strong>900+</strong>ประตูอาชีพตลอดกาล</div>
+      <div><strong>39</strong>แชมป์ที่คว้ามาได้</div>
+      <div><strong>5</strong>บัลลงดอร์</div>
+    </div>
+  </header>
+
+  <section>
+    <div class="kicker">ฟอร์มล่าสุด</div>
+    <h2 class="section-title">ซีซั่น 2025/26 กับ อัล นาสร์</h2>
+    <div class="stat-grid">
+      <div class="stat"><div class="n">35</div><div class="l">นัดที่ลงเล่น</div></div>
+      <div class="stat"><div class="n">29</div><div class="l">ประตูที่ทำได้</div></div>
+      <div class="stat"><div class="n">3</div><div class="l">แอสซิสต์</div></div>
+      <div class="stat"><div class="n">85′</div><div class="l">นาทีเฉลี่ยต่อนัด</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">เส้นทางสู่ตำนาน</div>
+    <h2 class="section-title">ไทม์ไลน์สโมสร</h2>
+    <div class="timeline">
+      <div class="touchline" aria-hidden="true"></div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2002 — 2003</div>
+        <div class="tl-club">Sporting CP</div>
+        <div class="tl-desc">จุดเริ่มต้นในลิสบอน เด็กหนุ่มจากมาเดราที่เปิดตัวในทีมชุดใหญ่ ก่อนแมนเชสเตอร์ ยูไนเต็ดจะดึงตัวไปหลังเกมกระชับมิตรที่โด่งดัง</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2003 — 2009</div>
+        <div class="tl-club">Manchester United</div>
+        <div class="tl-desc">สวมเสื้อหมายเลข 7 คว้าแชมป์พรีเมียร์ลีก 3 สมัย และแชมเปียนส์ลีกสมัยแรกในปี 2008 พร้อมบัลลงดอร์ครั้งแรกในชีวิต</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2009 — 2018</div>
+        <div class="tl-club">Real Madrid</div>
+        <div class="tl-desc">ย้ายด้วยค่าตัวสถิติโลกในตอนนั้น กลายเป็นดาวซัลโวสูงสุดตลอดกาลของสโมสร คว้าแชมเปียนส์ลีก 4 สมัย และบัลลงดอร์อีก 4 ครั้ง</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2018 — 2021</div>
+        <div class="tl-club">Juventus</div>
+        <div class="tl-desc">ย้ายสู่กัลโช เซเรีย อา คว้าแชมป์ลีกอิตาลี 2 สมัยติดต่อกัน และยังคงรักษาสถิติการทำประตูในระดับสูงสุดของยุโรป</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2021 — 2022</div>
+        <div class="tl-club">Manchester United (2)</div>
+        <div class="tl-desc">กลับบ้านเก่าอีกครั้ง ก่อนที่เส้นทางในพรีเมียร์ลีกจะปิดฉากลงในช่วงปลายปี 2022</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2023 — ปัจจุบัน</div>
+        <div class="tl-club">Al-Nassr FC</div>
+        <div class="tl-desc">ย้ายสู่ซาอุโปรลีก กลายเป็นนักฟุตบอลที่มีรายได้สูงสุดในโลก ทำสถิติเป็นผู้เล่นคนแรกที่ยิงครบ 100 ประตูให้ 4 สโมสรที่แตกต่างกัน และคว้าแชมป์ซาอุโปรลีกฤดูกาล 2025/26</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">ถ้วยรางวัล</div>
+    <h2 class="section-title">เกียรติประวัติที่สำคัญ</h2>
+    <div class="honours">
+      <div class="honour-card">
+        <div class="tag">สโมสร</div>
+        <h3>แชมเปียนส์ลีก × 5</h3>
+        <p>คว้าแชมป์รายการสูงสุดของยุโรปกับทั้งแมนเชสเตอร์ ยูไนเต็ด และเรอัล มาดริด เป็นหนึ่งในผู้เล่นที่ประสบความสำเร็จที่สุดในทัวร์นาเมนต์นี้</p>
+      </div>
+      <div class="honour-card">
+        <div class="tag">รางวัลส่วนบุคคล</div>
+        <h3>บัลลงดอร์ × 5</h3>
+        <p>ได้รับการโหวตให้เป็นนักฟุตบอลยอดเยี่ยมของโลกถึง 5 ครั้ง ระหว่างปี 2008 ถึง 2017 คู่แข่งตลอดกาลกับลิโอเนล เมสซี</p>
+      </div>
+      <div class="honour-card">
+        <div class="tag">ทีมชาติ</div>
+        <h3>แชมป์ยูโร 2016</h3>
+        <p>พาโปรตุเกสคว้าแชมป์รายการใหญ่ครั้งแรกในประวัติศาสตร์ชาติ ก่อนต่อยอดด้วยแชมป์เนชันส์ลีกอีก 2 สมัย</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">ลายเซ็นเฉพาะตัว</div>
+    <h2 class="section-title">ท่าฉลอง "Siuuu"</h2>
+    <div class="siuu">
+      <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <ellipse cx="100" cy="245" rx="60" ry="8" fill="rgba(242,240,232,0.06)"/>
+        <line x1="100" y1="60" x2="100" y2="150" stroke="#D4AF37" stroke-width="4" stroke-linecap="round"/>
+        <line x1="100" y1="150" x2="70" y2="235" stroke="#D4AF37" stroke-width="4" stroke-linecap="round"/>
+        <line x1="100" y1="150" x2="130" y2="235" stroke="#D4AF37" stroke-width="4" stroke-linecap="round"/>
+        <line x1="100" y1="80" x2="45" y2="35" stroke="#D4AF37" stroke-width="4" stroke-linecap="round"/>
+        <line x1="100" y1="80" x2="155" y2="35" stroke="#D4AF37" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="100" cy="40" r="24" fill="none" stroke="#F2F0E8" stroke-width="4"/>
+      </svg>
+      <div class="siuu-text">
+        การกระโดดหมุนตัวกลางอากาศพร้อมชูสองแขนแล้วตะโกน <b>"Siuuu"</b> กลายเป็นสัญลักษณ์การฉลองประตูที่โด่งดังที่สุดในวงการฟุตบอลยุคใหม่ ถูกแฟนบอลทั่วโลกเลียนแบบ ไม่ว่าจะเป็นเด็กในสนามหลังบ้านหรือดาวเตะคนอื่น ๆ กลายเป็นส่วนหนึ่งของวัฒนธรรมป๊อปที่อยู่เหนือกีฬาไปแล้ว
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="mark">CR7</div>
+    <div class="note">ข้อมูล ณ กรกฎาคม 2026 — สถิติอาจมีการเปลี่ยนแปลงตามฤดูกาลที่ดำเนินอยู่</div>
+  </footer>
+
+</div>
+</body>
+</html>
